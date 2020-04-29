@@ -21,24 +21,43 @@
 
         <!-- Modal body -->
         <div class="modal-body">
-          <form>
+          <form [formGroup]="addProductForm" (ngSubmit)="addProduct()">
             <div class="form-group">
               <label for="productname">Product Name:</label>
-              <input #productname type="text" class="form-control" placeholder="Enter product name" id="productname" name="productname">
+              <input #productname type="text" class="form-control" placeholder="Enter product name" id="productname"
+                     formControlName="productname">
             </div>
+            <div *ngIf="isSubmitted && formControls.productname.errors" class="help-block">
+              <p class="error" *ngIf="formControls.productname.errors.required">Name is required</p>
+            </div>
+
             <div class="form-group">
               <label for="mrp">Product MRP:</label>
-              <input #mrp type="text" class="form-control" placeholder="Enter product MRP" id="mrp" name="mrp">
+              <input #mrp type="text" class="form-control" placeholder="Enter product MRP" id="mrp"
+                     formControlName="mrp">
             </div>
+            <div *ngIf="isSubmitted && formControls.mrp.errors" class="help-block">
+              <p class="error" *ngIf="formControls.mrp.errors.required">MRP is required</p>
+            </div>
+
             <div class="form-group">
               <label for="sp">Product SP:</label>
-              <input #sp type="text" class="form-control" placeholder="Enter product SP" id="sp" name="sp">
+              <input #sp type="text" class="form-control" placeholder="Enter product SP" id="sp" formControlName="sp">
             </div>
+            <div *ngIf="isSubmitted && formControls.sp.errors" class="help-block">
+              <p class="error" *ngIf="formControls.sp.errors.required">SP is required</p>
+            </div>
+
             <div class="form-group">
               <label for="brand">Brand:</label>
-              <input #brand type="text" class="form-control" placeholder="Enter brand" id="brand" name="brand">
+              <input #brand type="text" class="form-control" placeholder="Enter brand" id="brand"
+                     formControlName="brand">
             </div>
-            <button type="submit" class="btn btn-primary" (click)="addProduct(productname.value,mrp.value,sp.value,brand.value)">Add</button>
+            <div *ngIf="isSubmitted && formControls.brand.errors" class="help-block">
+              <p class="error" *ngIf="formControls.brand.errors.required">Brand is required</p>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add</button>
           </form>
         </div>
 
