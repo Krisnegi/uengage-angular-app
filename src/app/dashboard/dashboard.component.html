@@ -1,0 +1,94 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <a class="navbar-brand mr-auto" href="/dashboard">Welcome {{username}}</a>
+  <button class="logout btn btn-danger" (click)="logout()">
+    Logout
+  </button>
+</nav>
+
+<div class="container-fluid p-5">
+  <h1 class="mb-5">Product Listing</h1>
+
+  <!-- The Modal -->
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Modal Heading</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="productname">Product Name:</label>
+              <input #productname type="text" class="form-control" placeholder="Enter product name" id="productname" name="productname">
+            </div>
+            <div class="form-group">
+              <label for="mrp">Product MRP:</label>
+              <input #mrp type="text" class="form-control" placeholder="Enter product MRP" id="mrp" name="mrp">
+            </div>
+            <div class="form-group">
+              <label for="sp">Product SP:</label>
+              <input #sp type="text" class="form-control" placeholder="Enter product SP" id="sp" name="sp">
+            </div>
+            <div class="form-group">
+              <label for="brand">Brand:</label>
+              <input #brand type="text" class="form-control" placeholder="Enter brand" id="brand" name="brand">
+            </div>
+            <button type="submit" class="btn btn-primary" (click)="addProduct(productname.value,mrp.value,sp.value,brand.value)">Add</button>
+          </form>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="d-flex mb-2">
+    <ul class="list-group list-group-horizontal mr-auto">
+      <li class="list-group-item">Total Products :{{totalProducts}}</li>
+      <li class="list-group-item">Active Products :{{activeProducts}}</li>
+      <li class="list-group-item">Inactive Products :{{inactiveProducts}}</li>
+    </ul>
+    <!-- Button to Open the Modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+      Add Product
+    </button>
+  </div>
+  <table class="table table-dark table-striped">
+    <thead>
+    <tr>
+      <th>Product Name</th>
+      <th>Product MRP</th>
+      <th>Product SP</th>
+      <th>Brand</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let product of productList">
+      <td>{{product.productName}}</td>
+      <td>{{product.mrp}}</td>
+      <td>{{product.sp}}</td>
+      <td>{{product.brand}}</td>
+      <td>{{ product.isActive ? 'Enabled' : 'Disabled' }}</td>
+      <td>
+        <div *ngIf="product.isActive;else elseBlock">
+          <button class="btn btn-danger" (click)="disableProduct(product)">Disable</button>
+        </div>
+        <ng-template #elseBlock>
+          <button class="btn btn-success" (click)="enableProduct(product)">Enable</button>
+        </ng-template>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
