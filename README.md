@@ -12,7 +12,7 @@ Screen Details:
   - Keep username and password as admin for both
   - In case of invalid password show error
   - In case of Success move to Dashboard Page
-  - 
+
 2. Dashboard
   - Show No. Of Products, No. of Active Products, No. Of Inactive Products
   - List of Products with the options to enable and disable the product.
